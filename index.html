@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Track2H – Custom songs in under 2 hours</title>
+<meta name="description" content="Order a custom song in any style from independent musicians. Delivered in under 2 hours. From $10 USD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf3ee;--surface:#fff;--ink:#2a1710;--muted:#7a5a4e;--acc:#b8161f;--on-acc:#fff;--gold:#f2b84b;--line:#ecd8cd;--deep:#2a1710;--on-deep:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d0f0a;--surface:#2b1912;--ink:#fbeee6;--muted:#d1ad9e;--acc:#ff6a5c;--on-acc:#1d0f0a;--line:#4a2a1f;--deep:#120804}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d0f0a;--surface:#2b1912;--ink:#fbeee6;--muted:#d1ad9e;--acc:#ff6a5c;--on-acc:#1d0f0a;--line:#4a2a1f;--deep:#120804}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,sans-serif;line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.05;margin:0;letter-spacing:-.02em}
+a{color:inherit}
+svg.ic{width:1em;height:1em;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.top{position:sticky;top:0;z-index:9;background:var(--bg);border-bottom:2px solid var(--line)}
+nav{display:flex;align-items:center;gap:16px;padding:12px 0;position:relative}
+nav ul{display:flex;gap:20px;list-style:none;margin:0 auto 0 24px;padding:0}
+nav ul a{text-decoration:none;font-weight:600;color:var(--muted)}
+nav ul a:hover{color:var(--ink)}
+.logo{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.4rem;text-decoration:none}
+.logo span{color:var(--acc)}
+.icon-btn{background:transparent;border:2px solid var(--line);color:var(--ink);border-radius:50%;width:42px;height:42px;font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.icon-btn:hover{border-color:var(--acc)}
+#menu{display:none}
+.btn{display:inline-block;background:var(--acc);color:var(--on-acc);border:0;border-radius:999px;padding:13px 26px;font:600 1rem "Figtree",sans-serif;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:52px 0 40px}
+.hero h1{font-size:clamp(2.7rem,7vw,4.8rem);font-weight:800}
+.hero p{color:var(--muted);max-width:46ch;margin:20px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:var(--muted);font-weight:600;font-size:.95rem}
+.trust span::before{content:"✓ ";color:var(--acc)}
+.clock{background:var(--acc);color:var(--on-acc);border-radius:28px;padding:26px;text-align:center;overflow:hidden}
+.clock small{display:block;font-weight:600;opacity:.9}
+.vinyl{width:150px;height:150px;margin:12px auto 0;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wave{display:flex;align-items:center;justify-content:center;gap:4px;height:44px;margin:10px 0 0}
+.wave i{width:6px;border-radius:4px;background:var(--gold);height:20%;animation:eq 1.1s ease-in-out infinite}
+@keyframes eq{0%,100%{height:15%}50%{height:100%}}
+.clock .time{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(3rem,10vw,4.6rem);font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1.1;margin:4px 0 12px}
+.clock .bar{height:10px;background:rgba(255,255,255,.25);border-radius:9px;overflow:hidden}
+.clock .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s linear}
+.clock button{margin-top:16px;background:var(--gold);color:#2a1710;border:0;border-radius:999px;padding:11px 22px;font:600 .95rem "Figtree",sans-serif;cursor:pointer}
+.marquee{background:var(--deep);color:var(--on-deep);overflow:hidden;padding:14px 0;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.3rem;white-space:nowrap}
+.marquee div{display:inline-block;animation:slide 32s linear infinite}
+.marquee span{margin:0 22px}
+.marquee span::after{content:"♪";margin-left:44px;color:var(--gold)}
+@keyframes slide{to{transform:translateX(-50%)}}
+section{padding:60px 0}
+.sec-h{font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:800;margin-bottom:10px}
+.sub{color:var(--muted);max-width:58ch;margin:0 0 32px}
+.studio{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.shot{border-radius:24px;padding:22px;color:#fff;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.shot svg{width:100%;height:130px}
+.shot h3{font-size:1.3rem}
+.shot p{margin:4px 0 0;opacity:.88;font-size:.95rem}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}
+.model{border-radius:20px;padding:20px;color:#2a1710;display:flex;flex-direction:column;gap:6px;min-height:190px}
+.model .mi{font-size:2.2rem;line-height:1}
+.model h3{font-size:1.25rem}
+.model p{margin:0;font-size:.95rem;opacity:.88;flex:1}
+.model button{align-self:flex-start;background:#2a1710;color:#fff;border:0;border-radius:999px;padding:7px 16px;font:600 .9rem "Figtree",sans-serif;cursor:pointer}
+.uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.use{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:22px}
+.use b{font-size:1.8rem;display:block;margin-bottom:6px}
+.use h3{font-size:1.15rem;margin-bottom:4px}
+.use p{margin:0;color:var(--muted);font-size:.95rem}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column}
+.plan.hot{border-color:var(--acc);border-width:3px}
+.plan h3{font-size:1.3rem}
+.price{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:2.6rem;margin:10px 0;color:var(--acc)}
+.price small{font-size:1rem;color:var(--muted);font-weight:500}
+.plan ul{padding-left:18px;margin:0 0 20px;color:var(--muted);flex:1}
+.tag{align-self:flex-start;background:var(--gold);color:#2a1710;font-weight:600;font-size:.85rem;border-radius:999px;padding:3px 12px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px;font:600 .92rem "Figtree",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.artists{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.artist{background:var(--surface);border-radius:22px;padding:22px;border:2px solid var(--line)}
+.artist[hidden]{display:none}
+.av{width:68px;height:68px;border-radius:50%;margin-bottom:14px;overflow:hidden;color:rgba(42,23,16,.75)}
+.av svg{width:100%;height:100%}
+.artist h3{font-size:1.2rem}
+.meta{color:var(--muted);font-size:.95rem;margin:4px 0 12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.row b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem}
+.pick{background:transparent;border:2px solid var(--acc);color:var(--acc);border-radius:999px;padding:7px 16px;font:600 .9rem "Figtree",sans-serif;cursor:pointer}
+.pick:hover{background:var(--acc);color:var(--on-acc)}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-top:54px}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;width:42px;height:42px;border-radius:50%;background:var(--gold);color:#2a1710;display:grid;place-items:center;font:800 1.2rem "Bricolage Grotesque",sans-serif}
+.steps h3{font-size:1.2rem;margin-bottom:6px}
+.steps p{margin:0;color:var(--muted)}
+.band{background:var(--deep);color:var(--on-deep);border-radius:28px;padding:40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.band h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;max-width:20ch}
+.band p{margin:8px 0 0;opacity:.8;max-width:44ch}
+.faq{max-width:760px}
+details{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;font-size:1.05rem}
+details p{margin:10px 0 0;color:var(--muted)}
+.order{background:var(--surface);border:2px solid var(--line);border-radius:28px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}
+.order label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:.95rem}
+.order .full{grid-column:1/-1}
+.order input,.order select,.order textarea{font:400 1rem "Figtree",sans-serif;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.order textarea{min-height:96px;resize:vertical}
+.total{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.6rem}
+.msg{grid-column:1/-1;background:var(--gold);color:#2a1710;border-radius:16px;padding:16px 20px;font-weight:600}
+.msg[hidden]{display:none}
+footer{border-top:2px solid var(--line);padding:40px 0 48px;color:var(--muted);font-size:.95rem}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot a{display:block;text-decoration:none;margin-bottom:6px}
+.foot a:hover{color:var(--ink)}
+#up{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;transition:opacity .2s;background:var(--acc);color:var(--on-acc);border-color:var(--acc)}
+#up.show{opacity:1;pointer-events:auto}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
+.rv.in{opacity:1;transform:none}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:28px}.order{grid-template-columns:1fr;padding:22px}.band{padding:28px}
+  #menu{display:grid}nav .btn{display:none}nav .logo{margin-right:auto}
+  nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:8px 16px}
+  nav ul.open{display:flex}nav ul a{display:block;padding:10px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.vinyl,.wave i,.marquee div{animation:none}.clock .bar i{transition:none}.rv{opacity:1;transform:none;transition:none}}
+#lang{font:600 .92rem "Figtree",sans-serif;background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:999px;padding:8px 10px;cursor:pointer}
+.paybox{background:var(--surface);border:2px solid var(--line);border-radius:28px;padding:32px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.paybox .sub{margin:0}
+.payside{display:flex;flex-direction:column;gap:12px;align-items:flex-start;max-width:320px}
+.payside p{margin:0;color:var(--muted);font-size:.95rem}
+.visa{display:inline-block;background:#fff;color:#1a1f71;border:2px solid var(--line);border-radius:10px;padding:4px 16px;font:italic 800 1.6rem "Bricolage Grotesque",sans-serif;letter-spacing:.02em}
+.payside [hidden]{display:none}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mic" viewBox="0 0 48 48"><rect x="17" y="5" width="14" height="24" rx="7" fill="currentColor"/><path d="M11 23v2a13 13 0 0 0 26 0v-2M24 38v6M16 44h16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="hp" viewBox="0 0 48 48"><path d="M8 30v-6a16 16 0 0 1 32 0v6" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><rect x="5" y="27" width="10" height="16" rx="4" fill="currentColor"/><rect x="33" y="27" width="10" height="16" rx="4" fill="currentColor"/></symbol>
+    <symbol id="note" viewBox="0 0 48 48"><path d="M19 34V10l19-4v24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><circle cx="13" cy="34" r="6" fill="currentColor"/><circle cx="32" cy="30" r="6" fill="currentColor"/></symbol>
+    <symbol id="piano" viewBox="0 0 48 48"><rect x="5" y="10" width="38" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 26v12M24 26v12M32 26v12" stroke="currentColor" stroke-width="2.5"/><rect x="12" y="10" width="7" height="17" fill="currentColor"/><rect x="21" y="10" width="7" height="17" fill="currentColor"/><rect x="30" y="10" width="7" height="17" fill="currentColor"/></symbol>
+    <symbol id="drum" viewBox="0 0 48 48"><ellipse cx="24" cy="22" rx="17" ry="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M7 22v14c0 3.3 7.6 6 17 6s17-2.700 17-6V22M14 6l10 14M34 6L24 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="gtr" viewBox="0 0 48 48"><circle cx="18" cy="31" r="11" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="18" cy="31" r="3.500" fill="currentColor"/><path d="M26 23L40 9M37 5l6 6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+    <symbol id="usr" viewBox="0 0 48 48"><circle cx="24" cy="18" r="9" fill="currentColor"/><path d="M6 48c0-11 8-17 18-17s18 6 18 17z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="top"><div class="wrap">
+<nav aria-label="Main">
+  <a class="logo" href="#top">Track<span>2H</span></a>
+  <ul id="links">
+    <li><a href="#styles">Styles</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#musicians">Musicians</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="icon-btn" id="theme" type="button" aria-label="Switch light and dark theme">◐</button>
+  <select id="lang" aria-label="Language"><option value="en">English</option><option value="pt">Português</option><option value="es">Español</option></select>
+  <a class="btn" href="#order">Order a song</a>
+  <button class="icon-btn" id="menu" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+  <div>
+    <h1>Your song, ready in under 2 hours.</h1>
+    <p>Choose a style, pick a musician and tell us your story. We deliver a finished track to your inbox. Prices in US dollars, from $10.</p>
+    <div class="cta">
+      <a class="btn" href="#order">Order now</a>
+      <a class="btn alt" href="#styles">Browse styles</a>
+    </div>
+    <div class="trust"><span>Delivery in under 2 hours</span><span>Free revisions</span><span>12 music styles</span></div>
+  </div>
+  <div class="clock" aria-live="polite">
+    <small>Maximum delivery time</small>
+    <svg class="vinyl" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="96" fill="#1a0c07"/>
+      <circle cx="100" cy="100" r="82" fill="none" stroke="#3a211a" stroke-width="2"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#3a211a" stroke-width="2"/>
+      <circle cx="100" cy="100" r="58" fill="none" stroke="#3a211a" stroke-width="2"/>
+      <path d="M100 100 L100 6 A94 94 0 0 1 170 38 Z" fill="rgba(255,255,255,.07)"/>
+      <circle cx="100" cy="100" r="34" fill="#f2b84b"/>
+      <circle cx="100" cy="100" r="30" fill="none" stroke="#2a1710" stroke-width="1.500"/>
+      <circle cx="100" cy="100" r="5" fill="#1a0c07"/>
+    </svg>
+    <div class="wave" id="wave" aria-hidden="true"></div>
+    <div class="time" id="timer">2:00:00</div>
+    <div class="bar"><i id="prog"></i></div>
+    <button id="sim" type="button">Preview the countdown</button>
+  </div>
+</div>
+
+<div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="studio"><div class="wrap">
+  <h2 class="sec-h">Made in the studio</h2>
+  <p class="sub">Every track goes through the same three steps before it reaches you.</p>
+  <div class="studio">
+    <div class="shot" style="background:#b8161f"><svg viewBox="0 0 200 130" aria-hidden="true"><use href="#mic" x="62" y="0" width="76" height="76" style="color:#f2b84b"/><path d="M30 100q70-34 140 0" fill="none" stroke="#fff" stroke-width="3" opacity=".5"/><path d="M10 116q90-46 180 0" fill="none" stroke="#fff" stroke-width="3" opacity=".3"/></svg><div><h3>Record</h3><p>Vocals and instruments captured by your chosen musician.</p></div></div>
+    <div class="shot" style="background:#6b3a22"><svg viewBox="0 0 200 130" aria-hidden="true"><g stroke="#f2b84b" stroke-width="5" stroke-linecap="round"><path d="M30 14v102M70 14v102M110 14v102M150 14v102M185 14v102"/></g><g fill="#fff"><rect x="21" y="70" width="18" height="14" rx="4"/><rect x="61" y="36" width="18" height="14" rx="4"/><rect x="101" y="82" width="18" height="14" rx="4"/><rect x="141" y="26" width="18" height="14" rx="4"/><rect x="176" y="58" width="18" height="14" rx="4"/></g></svg><div><h3>Mix</h3><p>Levels, space and balance tuned until it sounds right.</p></div></div>
+    <div class="shot" style="background:#3b1d12"><svg viewBox="0 0 200 130" aria-hidden="true"><circle cx="100" cy="65" r="58" fill="#1a0c07" stroke="#f2b84b" stroke-width="3"/><circle cx="100" cy="65" r="44" fill="none" stroke="#5a3326" stroke-width="2"/><circle cx="100" cy="65" r="30" fill="none" stroke="#5a3326" stroke-width="2"/><circle cx="100" cy="65" r="17" fill="#b8161f"/><circle cx="100" cy="65" r="4" fill="#fff"/></svg><div><h3>Master</h3><p>A final polish so it plays loud and clear on any speaker.</p></div></div>
+  </div>
+</div></section>
+
+<section id="styles" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Pick your sound</h2>
+  <p class="sub">Twelve styles, from club-ready beats to heartfelt ballads. Choose one and we start from there.</p>
+  <div class="models" id="models"></div>
+</div></section>
+
+<section id="uses" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Music for every moment</h2>
+  <p class="sub">People order a song for all kinds of reasons.</p>
+  <div class="uses">
+    <div class="use"><b>💍</b><h3>Weddings</h3><p>A first dance song or a surprise gift.</p></div>
+    <div class="use"><b>🎂</b><h3>Birthdays</h3><p>A personal song with their name in the lyrics.</p></div>
+    <div class="use"><b>🏢</b><h3>Business jingles</h3><p>A catchy tune for your brand, shop or ad.</p></div>
+    <div class="use"><b>🎙️</b><h3>Podcasts and video</h3><p>Intros, outros and background tracks.</p></div>
+    <div class="use"><b>⛪</b><h3>Worship and events</h3><p>Original songs for services and celebrations.</p></div>
+    <div class="use"><b>🎤</b><h3>Artists</h3><p>Beats and demos to start your next release.</p></div>
+  </div>
+</div></section>
+
+<section id="pricing" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Simple pricing in US dollars</h2>
+  <p class="sub">Every package is delivered in under 2 hours. One payment, no subscriptions.</p>
+  <div class="plans">
+    <div class="plan"><h3>Simple beat</h3><div class="price">$10 <small>USD</small></div>
+      <ul><li>Instrumental, 1 to 2 minutes</li><li>Any style you choose</li><li>1 MP3 file</li></ul>
+      <button class="btn" data-plan="10">Choose</button></div>
+    <div class="plan hot"><span class="tag">Most popular</span><h3>Full song</h3><div class="price">$25 <small>USD</small></div>
+      <ul><li>Song of 2 to 3 minutes</li><li>Lyrics and vocals included</li><li>1 free revision</li><li>MP3 and WAV files</li></ul>
+      <button class="btn" data-plan="25">Choose</button></div>
+    <div class="plan"><h3>Pro song</h3><div class="price">$60 <small>USD</small></div>
+      <ul><li>Studio recording and mixing</li><li>Final mastering</li><li>3 free revisions</li><li>High resolution cover art</li></ul>
+      <button class="btn" data-plan="60">Choose</button></div>
+    <div class="plan"><h3>Exclusive</h3><div class="price">$120 <small>USD</small></div>
+      <ul><li>Exclusive rights to the track</li><li>Extra instrumental version</li><li>Unlimited revisions for 24 hours</li></ul>
+      <button class="btn" data-plan="120">Choose</button></div>
+  </div>
+</div></section>
+
+<section id="musicians" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Meet the musicians</h2>
+  <p class="sub">Filter by style and pick the artist whose sound fits your idea.</p>
+  <div class="chips" id="chips"></div>
+  <div class="artists" id="artists"></div>
+</div></section>
+
+<section id="how" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">How it works</h2>
+  <p class="sub" style="margin-bottom:36px">From your first message to a finished track in four steps.</p>
+  <ol class="steps">
+    <li><h3>Pick a style and package</h3><p>Compare the options and choose what you need.</p></li>
+    <li><h3>Share your idea</h3><p>Tell us the theme, names and the occasion.</p></li>
+    <li><h3>Confirm and pay</h3><p>We reply with payment details in US dollars.</p></li>
+    <li><h3>Get your song</h3><p>Your track arrives by email in under 2 hours.</p></li>
+  </ol>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="band">
+    <div><h2>Not sure which style fits?</h2><p>Describe the moment in a few lines and we will suggest a style and a musician.</p></div>
+    <a class="btn" style="background:var(--gold);color:#2a1710" href="#order">Tell us your idea</a>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Questions and answers</h2>
+  <p class="sub">The things people ask us most.</p>
+  <div class="faq">
+    <details><summary>How fast will I get my song?</summary><p>Within 2 hours of confirming your order and payment.</p></details>
+    <details><summary>Can I ask for changes?</summary><p>Yes. Each package includes free revisions, from 1 to unlimited. Tell us what to change and we send a new version.</p></details>
+    <details><summary>Can the song include names and personal details?</summary><p>Yes. Send names, dates and short stories in your idea and the musician will weave them into the lyrics.</p></details>
+    <details><summary>Who owns the song?</summary><p>You can use any track for personal projects and social media. The Exclusive package gives you full exclusive rights.</p></details>
+    <details><summary>Which payment methods do you accept?</summary><p>We reply to your order with the payment options available in US dollars, such as bank transfer or a card link.</p></details>
+    <details><summary>What if I do not like the result?</summary><p>Write to us within 24 hours. We will fix it or agree a fair solution with you.</p></details>
+  </div>
+</div></section>
+
+<section id="order" style="padding-top:0"><div class="wrap">
+  <h2 class="sec-h">Order your song</h2>
+  <p class="sub">Fill in the details and send. We reply by email to confirm and share payment details.</p>
+  <div class="order">
+    <label>Your name<input id="name" type="text" autocomplete="name" placeholder="Jane Smith"></label>
+    <label>Your email<input id="mail" type="email" autocomplete="email" placeholder="jane@example.com"></label>
+    <label>Package
+      <select id="plan"><option value="10">Simple beat – $10</option><option value="25" selected>Full song – $25</option><option value="60">Pro song – $60</option><option value="120">Exclusive – $120</option></select>
+    </label>
+    <label>Style<select id="style"></select></label>
+    <label>Musician<select id="artist"></select></label>
+    <label>Occasion
+      <select id="occ"><option>Birthday</option><option>Wedding</option><option>Business or brand</option><option>Podcast or video</option><option>Worship or event</option><option>Release as an artist</option><option>Other</option></select>
+    </label>
+    <label class="full">Your idea<textarea id="idea" placeholder="Example: a romantic kizomba for my parents' wedding anniversary. Their names are Ana and Pedro."></textarea></label>
+    <div class="full row"><span class="total" id="total">Total: $25</span><button class="btn" id="send" type="button">Send my order</button></div>
+    <div class="msg" id="msg" hidden></div>
+  </div>
+</div></section>
+<section id="pay" style="padding-top:0"><div class="wrap">
+  <div class="paybox">
+    <div><h2 class="sec-h">Pay by card</h2><p class="sub">Visa cards are accepted. You enter your card details on a secure payment page, never on this site.</p></div>
+    <div class="payside">
+      <span class="visa" aria-label="Visa">VISA</span>
+      <button class="btn" id="paybtn" type="button" hidden>Pay with Visa</button>
+      <p id="paynote">We send a secure Visa payment link by email as soon as you place your order.</p>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><a class="logo" href="#top">Track<span>2H</span></a><p style="margin:8px 0 0">Custom songs, delivered fast.</p></div>
+    <div><a href="#styles">Styles</a><a href="#pricing">Pricing</a><a href="#musicians">Musicians</a><a href="#faq">FAQ</a></div>
+    <div><a href="mailto:hello@track2h.com">hello@track2h.com</a><a href="#order">Order a song</a><p style="margin:8px 0 0">© 2026 Track2H. All rights reserved.</p></div>
+  </div>
+</footer>
+<button class="icon-btn" id="up" type="button" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+var EMAIL="hello@track2h.com";
+var $=function(i){return document.getElementById(i)};
+function ic(n){return '<svg class="ic" aria-hidden="true"><use href="#'+n+'"/></svg>'}
+var STYLES=[
+["Afro house","Warm bass, hypnotic percussion and dance floor energy.","#f2b84b","drum"],
+["Kizomba","Smooth, slow and romantic. Made for dancing close.","#f4a79b","mic"],
+["Semba","Classic Angolan rhythm with lively guitar and soul.","#e8c59a","gtr"],
+["Hip hop","Hard beats and sharp lyrics, from boom bap to modern.","#f6cfa0","mic"],
+["Trap","Deep 808 bass, rolling hi-hats and a dark mood.","#d9a89c","hp"],
+["Gospel","Uplifting vocals and piano for worship and praise.","#f7dfa1","piano"],
+["Pop","Bright melodies and catchy hooks you will hum all day.","#f5b8b0","note"],
+["Ballad","Emotional piano and voice for the moments that matter.","#e5c1ae","piano"],
+["Reggae","Relaxed groove, offbeat guitar and sunny vibes.","#e9d28c","gtr"],
+["Lo-fi","Soft, dusty beats for studying, relaxing and content.","#d8c2ad","hp"],
+["R&B","Smooth grooves and soulful vocals with a warm feel.","#eeb0a0","mic"],
+["Jingle","Short and memorable. Perfect for ads and brands.","#f2c08c","note"]];
+var ARTISTS=[
+["Kiala Luvambo","#f2b84b","Vocals and guitar","Kizomba,Semba,Ballad","1h 20min",15],
+["DJ Mbanza","#f4a79b","Beat production","Afro house,Lo-fi,Trap","55min",10],
+["Neusa Sambo","#e8c59a","Vocals and piano","Gospel,Ballad,R&B","1h 35min",20],
+["Rui Tchakala","#d9a89c","Lyrics and vocals","Hip hop,Trap,Reggae","1h 10min",18],
+["Dani Costa","#f5b8b0","Songwriter and producer","Pop,R&B,Jingle","1h 15min",12],
+["Mavi Santos","#e9d28c","Vocals","Semba,Reggae,Gospel","1h 30min",16]];
+var plan=$("plan"),style=$("style"),artist=$("artist"),total=$("total"),i;
+/* wave and marquee */
+var w=$("wave"),b;
+for(i=0;i<26;i++){b=document.createElement("i");b.style.animationDelay=(i*0.07)+"s";b.style.animationDuration=(0.8+(i%5)*0.15)+"s";w.appendChild(b)}
+var mh="";for(i=0;i<2;i++)STYLES.forEach(function(s){mh+="<span>"+s[0]+"</span>"});$("mq").innerHTML=mh;
+/* styles */
+var h="";
+STYLES.forEach(function(s,k){h+='<div class="model" style="background:'+s[2]+'"><div class="mi">'+ic(s[3])+'</div><h3>'+s[0]+'</h3><p>'+s[1]+'</p><button type="button" data-style="'+k+'">Choose style</button></div>'});
+$("models").innerHTML=h;
+STYLES.forEach(function(s){var o=document.createElement("option");o.textContent=s[0];o.value=s[0];style.appendChild(o)});
+ARTISTS.forEach(function(a){var o=document.createElement("option");o.textContent=a[0];artist.appendChild(o)});
+/* musicians and filter */
+h="";
+ARTISTS.forEach(function(a){h+='<div class="artist" data-g="'+a[3]+'"><div class="av" style="background:'+a[1]+'">'+ic("usr")+'</div><h3>'+a[0]+'</h3><p class="meta">'+a[2]+'<br>'+a[3].split(",").join(", ")+'<br>Average delivery: '+a[4]+'</p><div class="row"><b>from $'+a[5]+'</b><button class="pick" type="button" data-artist="'+a[0]+'">Choose</button></div></div>'});
+$("artists").innerHTML=h;
+h="";["All"].concat(STYLES.map(function(s){return s[0]})).forEach(function(c,k){h+='<button class="chip" type="button" aria-pressed="'+(k===0)+'" data-f="'+c+'">'+c+'</button>'});
+$("chips").innerHTML=h;
+$("chips").addEventListener("click",function(e){
+  var t=e.target.closest(".chip");if(!t)return;
+  var f=t.getAttribute("data-f");
+  document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===t)});
+  document.querySelectorAll(".artist").forEach(function(a){a.hidden=!(f==="All"||a.getAttribute("data-g").split(",").indexOf(f)>-1)});
+});
+/* choices */
+function upd(){total.textContent="Total: $"+plan.value;if(typeof pay==="function")pay()}
+plan.addEventListener("change",upd);
+document.addEventListener("click",function(e){
+  var p=e.target.closest("[data-plan]"),a=e.target.closest("[data-artist]"),s=e.target.closest("[data-style]");
+  if(p){plan.value=p.getAttribute("data-plan");upd();$("order").scrollIntoView()}
+  if(a){artist.value=a.getAttribute("data-artist");$("order").scrollIntoView()}
+  if(s){style.value=STYLES[+s.getAttribute("data-style")][0];$("order").scrollIntoView()}
+});
+/* menu and theme */
+var links=$("links"),menu=$("menu");
+menu.addEventListener("click",function(){var o=links.classList.toggle("open");menu.setAttribute("aria-expanded",o)});
+links.addEventListener("click",function(){links.classList.remove("open");menu.setAttribute("aria-expanded","false")});
+$("theme").addEventListener("click",function(){
+  var r=document.documentElement,dark=r.getAttribute("data-theme")==="dark"||(!r.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme:dark)").matches);
+  r.setAttribute("data-theme",dark?"light":"dark");
+});
+/* back to top */
+var up=$("up");
+addEventListener("scroll",function(){up.classList.toggle("show",scrollY>700)},{passive:true});
+up.addEventListener("click",function(){scrollTo({top:0})});
+/* reveal on scroll */
+if("IntersectionObserver" in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}})},{threshold:.12});
+  document.querySelectorAll(".shot,.model,.use,.plan,.artist,.steps li,.band,details").forEach(function(el){el.classList.add("rv");io.observe(el)});
+}
+/* countdown preview */
+var TOTAL=7200,left=TOTAL,iv=null;
+function fmt(s){var hh=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return hh+":"+(m<10?"0":"")+m+":"+(x<10?"0":"")+x}
+function draw(){$("timer").textContent=fmt(left);$("prog").style.width=((TOTAL-left)/TOTAL*100)+"%"}
+$("sim").addEventListener("click",function(){
+  if(iv)clearInterval(iv);
+  left=TOTAL;draw();setText($("sim"),"Running: 1 second = 1 minute");
+  iv=setInterval(function(){left-=60;if(left<=0){left=0;clearInterval(iv);iv=null;setText($("sim"),"Delivered. Watch again")}draw()},1000);
+});
+/* payment links: paste your own secure payment links here (for example Stripe or PayPal) */
+var PAY={10:"",25:"",60:"",120:""};
+var pb=$("paybtn");
+function pay(){var l=PAY[plan.value];pb.hidden=!l;$("paynote").hidden=!!l}
+pb.addEventListener("click",function(){var l=PAY[plan.value];if(l)window.open(l,"_blank","noopener")});
+pay();
+/* languages */
+var DICT=[
+["Styles","Estilos","Estilos"],["Pricing","Preços","Precios"],["Musicians","Músicos","Músicos"],["How it works","Como funciona","Cómo funciona"],["FAQ","Perguntas","Preguntas"],["Order a song","Encomendar música","Pedir una canción"],
+["Your song, ready in under 2 hours.","A tua música pronta em menos de 2 horas.","Tu canción lista en menos de 2 horas."],
+["Choose a style, pick a musician and tell us your story. We deliver a finished track to your inbox. Prices in US dollars, from $10.","Escolhe um estilo, um músico e conta-nos a tua história. Entregamos a faixa pronta no teu e-mail. Preços em dólares, desde 10 $.","Elige un estilo, un músico y cuéntanos tu historia. Entregamos la canción terminada en tu correo. Precios en dólares, desde $10."],
+["Order now","Encomendar agora","Pedir ahora"],["Browse styles","Ver estilos","Ver estilos"],
+["Delivery in under 2 hours","Entrega em menos de 2 horas","Entrega en menos de 2 horas"],["Free revisions","Revisões grátis","Revisiones gratis"],["12 music styles","12 estilos musicais","12 estilos musicales"],
+["Maximum delivery time","Prazo máximo de entrega","Tiempo máximo de entrega"],["Preview the countdown","Ver a contagem decrescente","Ver la cuenta atrás"],
+["Running: 1 second = 1 minute","A correr: 1 segundo = 1 minuto","En marcha: 1 segundo = 1 minuto"],["Delivered. Watch again","Entregue. Ver de novo","Entregada. Ver otra vez"],
+["Made in the studio","Feito em estúdio","Hecho en el estudio"],["Every track goes through the same three steps before it reaches you.","Cada faixa passa pelos mesmos três passos antes de chegar a ti.","Cada canción pasa por los mismos tres pasos antes de llegar a ti."],
+["Record","Gravar","Grabar"],["Vocals and instruments captured by your chosen musician.","Voz e instrumentos gravados pelo músico que escolheste.","Voz e instrumentos grabados por el músico que elegiste."],
+["Mix","Misturar","Mezclar"],["Levels, space and balance tuned until it sounds right.","Níveis, espaço e equilíbrio ajustados até soar bem.","Niveles, espacio y equilibrio ajustados hasta que suene bien."],
+["Master","Masterizar","Masterizar"],["A final polish so it plays loud and clear on any speaker.","Um acabamento final para soar forte e claro em qualquer coluna.","Un acabado final para que suene fuerte y claro en cualquier altavoz."],
+["Pick your sound","Escolhe o teu som","Elige tu sonido"],["Twelve styles, from club-ready beats to heartfelt ballads. Choose one and we start from there.","Doze estilos, de batidas para a pista a baladas emocionantes. Escolhe um e começamos por aí.","Doce estilos, desde ritmos de pista hasta baladas emotivas. Elige uno y empezamos desde ahí."],
+["Choose style","Escolher estilo","Elegir estilo"],["Ballad","Balada","Balada"],
+["Warm bass, hypnotic percussion and dance floor energy.","Baixos quentes, percussão hipnótica e energia de pista.","Bajos cálidos, percusión hipnótica y energía de pista."],
+["Smooth, slow and romantic. Made for dancing close.","Suave, lenta e romântica. Feita para dançar a dois.","Suave, lenta y romántica. Hecha para bailar juntos."],
+["Classic Angolan rhythm with lively guitar and soul.","Ritmo clássico angolano com guitarra viva e alma.","Ritmo clásico angoleño con guitarra viva y alma."],
+["Hard beats and sharp lyrics, from boom bap to modern.","Batidas fortes e letras afiadas, do boom bap ao moderno.","Ritmos duros y letras afiladas, del boom bap a lo moderno."],
+["Deep 808 bass, rolling hi-hats and a dark mood.","Baixo 808 profundo, hi-hats rápidos e ambiente sombrio.","Bajo 808 profundo, hi-hats rápidos y ambiente oscuro."],
+["Uplifting vocals and piano for worship and praise.","Vozes inspiradoras e piano para louvor e adoração.","Voces inspiradoras y piano para alabanza y adoración."],
+["Bright melodies and catchy hooks you will hum all day.","Melodias brilhantes e refrões que ficam na cabeça o dia todo.","Melodías brillantes y estribillos que tararearás todo el día."],
+["Emotional piano and voice for the moments that matter.","Piano e voz emocionantes para os momentos que contam.","Piano y voz emotivos para los momentos importantes."],
+["Relaxed groove, offbeat guitar and sunny vibes.","Ritmo descontraído, guitarra em contratempo e boas vibrações.","Ritmo relajado, guitarra a contratiempo y buen ambiente."],
+["Soft, dusty beats for studying, relaxing and content.","Batidas suaves para estudar, relaxar e criar conteúdo.","Ritmos suaves para estudiar, relajarse y crear contenido."],
+["Smooth grooves and soulful vocals with a warm feel.","Grooves suaves e vozes soul com um toque caloroso.","Grooves suaves y voces soul con un toque cálido."],
+["Short and memorable. Perfect for ads and brands.","Curto e memorável. Perfeito para anúncios e marcas.","Corto y memorable. Perfecto para anuncios y marcas."],
+["Music for every moment","Música para cada momento","Música para cada momento"],["People order a song for all kinds of reasons.","As pessoas encomendam músicas por todo o tipo de razões.","La gente pide canciones por todo tipo de razones."],
+["Weddings","Casamentos","Bodas"],["A first dance song or a surprise gift.","Uma música para a primeira dança ou um presente surpresa.","Una canción para el primer baile o un regalo sorpresa."],
+["Birthdays","Aniversários","Cumpleaños"],["A personal song with their name in the lyrics.","Uma música pessoal com o nome da pessoa na letra.","Una canción personal con su nombre en la letra."],
+["Business jingles","Jingles para empresas","Jingles para empresas"],["A catchy tune for your brand, shop or ad.","Uma melodia cativante para a tua marca, loja ou anúncio.","Una melodía pegadiza para tu marca, tienda o anuncio."],
+["Podcasts and video","Podcasts e vídeo","Podcasts y vídeo"],["Intros, outros and background tracks.","Intros, finais e músicas de fundo.","Intros, cierres y música de fondo."],
+["Worship and events","Louvor e eventos","Alabanza y eventos"],["Original songs for services and celebrations.","Músicas originais para cultos e celebrações.","Canciones originales para cultos y celebraciones."],
+["Artists","Artistas","Artistas"],["Beats and demos to start your next release.","Batidas e demos para começar o teu próximo lançamento.","Ritmos y demos para empezar tu próximo lanzamiento."],
+["Simple pricing in US dollars","Preços simples em dólares","Precios simples en dólares"],["Every package is delivered in under 2 hours. One payment, no subscriptions.","Todos os pacotes são entregues em menos de 2 horas. Um só pagamento, sem subscrições.","Todos los paquetes se entregan en menos de 2 horas. Un solo pago, sin suscripciones."],
+["Simple beat","Beat simples","Beat simple"],["Instrumental, 1 to 2 minutes","Instrumental, 1 a 2 minutos","Instrumental, 1 a 2 minutos"],["Any style you choose","Qualquer estilo à tua escolha","Cualquier estilo que elijas"],["1 MP3 file","1 ficheiro MP3","1 archivo MP3"],["Choose","Escolher","Elegir"],
+["Most popular","Mais pedido","Más popular"],["Full song","Música completa","Canción completa"],["Song of 2 to 3 minutes","Música de 2 a 3 minutos","Canción de 2 a 3 minutos"],["Lyrics and vocals included","Letra e voz incluídas","Letra y voz incluidas"],["1 free revision","1 revisão grátis","1 revisión gratis"],["MP3 and WAV files","Ficheiros MP3 e WAV","Archivos MP3 y WAV"],
+["Pro song","Música profissional","Canción profesional"],["Studio recording and mixing","Gravação e mistura em estúdio","Grabación y mezcla en estudio"],["Final mastering","Masterização final","Masterización final"],["3 free revisions","3 revisões grátis","3 revisiones gratis"],["High resolution cover art","Capa em alta resolução","Portada en alta resolución"],
+["Exclusive","Exclusiva","Exclusiva"],["Exclusive rights to the track","Direitos exclusivos da faixa","Derechos exclusivos de la pista"],["Extra instrumental version","Versão instrumental extra","Versión instrumental extra"],["Unlimited revisions for 24 hours","Revisões ilimitadas durante 24 horas","Revisiones ilimitadas durante 24 horas"],
+["Meet the musicians","Conhece os músicos","Conoce a los músicos"],["Filter by style and pick the artist whose sound fits your idea.","Filtra por estilo e escolhe o artista cujo som combina com a tua ideia.","Filtra por estilo y elige al artista cuyo sonido encaje con tu idea."],["All","Todos","Todos"],
+["Vocals and guitar","Voz e guitarra","Voz y guitarra"],["Beat production","Produção de beats","Producción de beats"],["Vocals and piano","Voz e piano","Voz y piano"],["Lyrics and vocals","Letras e voz","Letras y voz"],["Songwriter and producer","Compositor e produtor","Compositor y productor"],["Vocals","Voz","Voz"],
+["From your first message to a finished track in four steps.","Da primeira mensagem à faixa pronta em quatro passos.","Del primer mensaje a la canción terminada en cuatro pasos."],
+["Pick a style and package","Escolhe estilo e pacote","Elige estilo y paquete"],["Compare the options and choose what you need.","Compara as opções e escolhe o que precisas.","Compara las opciones y elige lo que necesitas."],
+["Share your idea","Partilha a tua ideia","Comparte tu idea"],["Tell us the theme, names and the occasion.","Diz-nos o tema, os nomes e a ocasião.","Cuéntanos el tema, los nombres y la ocasión."],
+["Confirm and pay","Confirma e paga","Confirma y paga"],["We reply with payment details in US dollars.","Respondemos com os dados de pagamento em dólares.","Respondemos con los datos de pago en dólares."],
+["Get your song","Recebe a tua música","Recibe tu canción"],["Your track arrives by email in under 2 hours.","A tua faixa chega ao e-mail em menos de 2 horas.","Tu canción llega a tu correo en menos de 2 horas."],
+["Not sure which style fits?","Não sabes que estilo escolher?","¿No sabes qué estilo elegir?"],["Describe the moment in a few lines and we will suggest a style and a musician.","Descreve o momento em poucas linhas e sugerimos um estilo e um músico.","Describe el momento en pocas líneas y te sugerimos un estilo y un músico."],["Tell us your idea","Conta-nos a tua ideia","Cuéntanos tu idea"],
+["Questions and answers","Perguntas e respostas","Preguntas y respuestas"],["The things people ask us most.","As perguntas que mais nos fazem.","Lo que más nos preguntan."],
+["How fast will I get my song?","Em quanto tempo recebo a música?","¿Cuánto tarda en llegar mi canción?"],["Within 2 hours of confirming your order and payment.","Em até 2 horas depois de confirmares a encomenda e o pagamento.","En un máximo de 2 horas tras confirmar el pedido y el pago."],
+["Can I ask for changes?","Posso pedir alterações?","¿Puedo pedir cambios?"],["Yes. Each package includes free revisions, from 1 to unlimited. Tell us what to change and we send a new version.","Sim. Cada pacote inclui revisões grátis, de 1 a ilimitadas. Diz-nos o que mudar e enviamos uma nova versão.","Sí. Cada paquete incluye revisiones gratis, de 1 a ilimitadas. Dinos qué cambiar y te enviamos una nueva versión."],
+["Can the song include names and personal details?","A música pode ter nomes e detalhes pessoais?","¿La canción puede incluir nombres y detalles personales?"],["Yes. Send names, dates and short stories in your idea and the musician will weave them into the lyrics.","Sim. Envia nomes, datas e pequenas histórias na tua ideia e o músico inclui-os na letra.","Sí. Envía nombres, fechas y pequeñas historias en tu idea y el músico las incluirá en la letra."],
+["Who owns the song?","De quem é a música?","¿De quién es la canción?"],["You can use any track for personal projects and social media. The Exclusive package gives you full exclusive rights.","Podes usar qualquer faixa em projetos pessoais e redes sociais. O pacote Exclusiva dá-te direitos exclusivos totais.","Puedes usar cualquier pista en proyectos personales y redes sociales. El paquete Exclusiva te da derechos exclusivos completos."],
+["Which payment methods do you accept?","Que métodos de pagamento aceitam?","¿Qué métodos de pago aceptan?"],["We reply to your order with the payment options available in US dollars, such as bank transfer or a card link.","Respondemos à tua encomenda com as opções de pagamento em dólares, como transferência bancária ou ligação para pagar com cartão.","Respondemos a tu pedido con las opciones de pago en dólares, como transferencia bancaria o enlace de pago con tarjeta."],
+["What if I do not like the result?","E se não gostar do resultado?","¿Y si no me gusta el resultado?"],["Write to us within 24 hours. We will fix it or agree a fair solution with you.","Escreve-nos em 24 horas. Corrigimos ou combinamos uma solução justa contigo.","Escríbenos en 24 horas. Lo corregimos o acordamos una solución justa contigo."],
+["Order your song","Encomenda a tua música","Pide tu canción"],["Fill in the details and send. We reply by email to confirm and share payment details.","Preenche os dados e envia. Respondemos por e-mail para confirmar e enviar os dados de pagamento.","Rellena los datos y envía. Respondemos por correo para confirmar y compartir los datos de pago."],
+["Your name","O teu nome","Tu nombre"],["Your email","O teu e-mail","Tu correo"],["Package","Pacote","Paquete"],["Style","Estilo","Estilo"],["Musician","Músico","Músico"],["Occasion","Ocasião","Ocasión"],["Your idea","A tua ideia","Tu idea"],
+["Simple beat – $10","Beat simples – $10","Beat simple – $10"],["Full song – $25","Música completa – $25","Canción completa – $25"],["Pro song – $60","Música profissional – $60","Canción profesional – $60"],["Exclusive – $120","Exclusiva – $120","Exclusiva – $120"],
+["Birthday","Aniversário","Cumpleaños"],["Wedding","Casamento","Boda"],["Business or brand","Empresa ou marca","Empresa o marca"],["Podcast or video","Podcast ou vídeo","Podcast o vídeo"],["Worship or event","Louvor ou evento","Alabanza o evento"],["Release as an artist","Lançamento como artista","Lanzamiento como artista"],["Other","Outra","Otra"],
+["Example: a romantic kizomba for my parents' wedding anniversary. Their names are Ana and Pedro.","Exemplo: uma kizomba romântica para o aniversário de casamento dos meus pais. Chamam-se Ana e Pedro.","Ejemplo: una kizomba romántica para el aniversario de boda de mis padres. Se llaman Ana y Pedro."],
+["Send my order","Enviar encomenda","Enviar pedido"],
+["Please enter your name and email to continue.","Preenche o nome e o e-mail para continuar.","Escribe tu nombre y correo para continuar."],
+["Opening your email app to send the order. If nothing opens, write to ","A abrir a tua app de e-mail para enviar a encomenda. Se nada abrir, escreve para ","Abriendo tu app de correo para enviar el pedido. Si no se abre nada, escribe a "],
+["Pay by card","Pagar com cartão","Pagar con tarjeta"],["Visa cards are accepted. You enter your card details on a secure payment page, never on this site.","Aceitamos cartões Visa. Introduzes os dados do cartão numa página de pagamento segura, nunca neste site.","Aceptamos tarjetas Visa. Introduces los datos de la tarjeta en una página de pago segura, nunca en este sitio."],
+["Pay with Visa","Pagar com Visa","Pagar con Visa"],["We send a secure Visa payment link by email as soon as you place your order.","Enviamos por e-mail uma ligação de pagamento Visa segura assim que fizeres a encomenda.","Enviamos por correo un enlace de pago Visa seguro en cuanto hagas el pedido."],
+["Custom songs, delivered fast.","Músicas à medida, entregues depressa.","Canciones a medida, entregadas rápido."],["© 2026 Track2H. All rights reserved.","© 2026 Track2H. Todos os direitos reservados.","© 2026 Track2H. Todos los derechos reservados."]];
+var MAP={pt:{},es:{}},ORIG=new WeakMap(),lang="en";
+DICT.forEach(function(r){MAP.pt[r[0]]=r[1];MAP.es[r[0]]=r[2]});
+function tr(s,l){
+  if(l==="en")return s;
+  var d=MAP[l],k=s.trim();
+  if(d[s]!==undefined)return d[s];
+  if(d[k]!==undefined)return s.replace(k,function(){return d[k]});
+  if(k.indexOf("Average delivery: ")===0)return (l==="pt"?"Entrega média: ":"Entrega media: ")+k.slice(18);
+  if(k.indexOf("from $")===0)return "desde $"+k.slice(6);
+  if(k.indexOf(", ")>0)return k.split(", ").map(function(p){return d[p]||p}).join(", ");
+  return s;
+}
+function walk(root){
+  var tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,list=[];
+  while((n=tw.nextNode())){
+    var pn=n.parentNode.nodeName;
+    if(pn==="SCRIPT"||pn==="STYLE"||!n.nodeValue.trim())continue;
+    list.push(n);
+  }
+  list.forEach(function(t){if(!ORIG.has(t))ORIG.set(t,t.nodeValue);t.nodeValue=tr(ORIG.get(t),lang)});
+}
+function setText(el,en){el.textContent=en;walk(el)}
+function setLang(l){
+  lang=l;document.documentElement.lang=l;walk(document.body);
+  document.querySelectorAll("[placeholder]").forEach(function(e){
+    if(!e.dataset.ph)e.dataset.ph=e.placeholder;
+    e.placeholder=l==="en"?e.dataset.ph:(MAP[l][e.dataset.ph]||e.dataset.ph);
+  });
+  try{localStorage.setItem("t2h-lang",l)}catch(x){}
+}
+document.querySelectorAll("#occ option").forEach(function(o){o.value=o.textContent});
+var langSel=$("lang"),saved="en";
+try{saved=localStorage.getItem("t2h-lang")||""}catch(x){}
+if(!saved){var nl=(navigator.language||"en").slice(0,2);saved=nl==="pt"||nl==="es"?nl:"en"}
+langSel.value=saved;
+langSel.addEventListener("change",function(){setLang(langSel.value)});
+if(saved!=="en")setLang(saved);
+/* send order */
+$("send").addEventListener("click",function(){
+  var n=$("name").value.trim(),e=$("mail").value.trim(),m=$("msg");
+  m.hidden=false;
+  if(!n||!e){setText(m,"Please enter your name and email to continue.");return}
+  var body="Name: "+n+"\nEmail: "+e+"\nPackage: $"+plan.value+"\nStyle: "+style.value+"\nMusician: "+artist.value+"\nOccasion: "+$("occ").value+"\n\nIdea:\n"+$("idea").value;
+  setText(m,"Opening your email app to send the order. If nothing opens, write to ");m.appendChild(document.createTextNode(EMAIL+"."));
+  window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("New song order – $"+plan.value)+"&body="+encodeURIComponent(body);
+});
+})();
+</script>
+</body>
+</html>
